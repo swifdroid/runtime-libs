@@ -18,3 +18,5 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "runtime-libs"
+
+include(":compression")
