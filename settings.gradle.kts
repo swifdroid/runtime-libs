@@ -21,3 +21,4 @@ rootProject.name = "runtime-libs"
 
 include(":compression")
 include(":core")
+include(":foundation")
