@@ -35,10 +35,14 @@ Then add dependencies to the modules you need:
 
 ```kotlin
 dependencies {
+    implementation("com.github.SwifDroid.runtime-libs:compression:6.1.0")
     implementation("com.github.SwifDroid.runtime-libs:core:6.1.0")
     implementation("com.github.SwifDroid.runtime-libs:foundation:6.1.0")
+    implementation("com.github.SwifDroid.runtime-libs:foundationessentials:6.1.0")
+    implementation("com.github.SwifDroid.runtime-libs:i18n:6.1.0")
     implementation("com.github.SwifDroid.runtime-libs:networking:6.1.0")
-    // Add more as needed...
+    implementation("com.github.SwifDroid.runtime-libs:testing:6.1.0")
+    implementation("com.github.SwifDroid.runtime-libs:xml:6.1.0")
 }
 ```
 
