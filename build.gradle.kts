@@ -1,8 +1,3 @@
 plugins {}
 
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-    }
-}
+allprojects {}

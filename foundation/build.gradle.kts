@@ -28,11 +28,16 @@ android {
     sourceSets["main"].jniLibs.srcDirs("src/main/jniLibs")
 }
 
-afterEvaluate {
-    publishing {
-        publications {
+publishing {
+    publications {
+        // Wrap in afterEvaluate only this one call if needed
+        afterEvaluate {
             create<MavenPublication>("release") {
-                from(components["release"])
+                // Use safe access to component
+                val releaseComponent = components.findByName("release")
+                if (releaseComponent != null) {
+                    from(releaseComponent)
+                }
 
                 groupId = "com.github.swifdroid"
                 artifactId = "foundation"
