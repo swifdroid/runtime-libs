@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "stream.swift.foundation-essentials"
+    namespace = "stream.swift.foundationessentials"
     compileSdk = 35
 
     defaultConfig {
@@ -33,7 +33,7 @@ publishing {
                 }
 
                 groupId = "com.github.swifdroid"
-                artifactId = "foundation-essentials"
+                artifactId = "foundationessentials"
                 version = "6.1.0"
 
                 pom {
