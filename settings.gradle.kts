@@ -22,7 +22,7 @@ rootProject.name = "runtime-libs"
 include(":compression")
 include(":core")
 include(":foundation")
-include(":foundation-essentials")
+include(":foundationessentials")
 include(":i18n")
 include(":networking")
 include(":testing")
