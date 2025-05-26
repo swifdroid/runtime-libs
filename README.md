@@ -1,10 +1,8 @@
-Precompiled native libraries for running Swift apps on Android.
+[![](https://jitpack.io/v/SwifDroid/runtime-libs.svg)](https://jitpack.io/#SwifDroid/runtime-libs)
 
-This repository packages Swift runtime `.so` files into AAR modules.
+# Precompiled native libraries for Swift on Android
 
-> ⚠️ Version `6.1.0` corresponds to Swift **6.1.0**. Future tags will follow Swift versions (e.g. `6.2.0`, `6.3.0`, etc).
-
----
+This repository packages Swift runtime `.so` files into AAR modules, published via [JitPack](https://jitpack.io/#swifdroid/runtime-libs)
 
 ## Modules
 
@@ -18,8 +16,6 @@ This repository packages Swift runtime `.so` files into AAR modules.
 | Networking             | `networking`             | libFoundationNetworking, libcurl, libssl   |
 | Testing                | `testing`                | libXCTest, libTesting                      |
 | XML                    | `xml`                    | libFoundationXML, libxml2                  |
-
----
 
 ## Usage
 
