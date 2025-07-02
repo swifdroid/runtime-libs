@@ -12,14 +12,6 @@ android {
         consumerProguardFiles("consumer-rules.pro")
     }
 
-    packaging {
-        jniLibs {
-            keepDebugSymbols.add("*/arm64-v8a/libdispatch.so")
-            keepDebugSymbols.add("*/armeabi-v7a/libdispatch.so")
-            keepDebugSymbols.add("*/x86_64/libdispatch.so")
-        }
-    }
-
     buildTypes {
         release {
             isMinifyEnabled = false

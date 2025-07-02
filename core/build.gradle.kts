@@ -15,8 +15,11 @@ android {
     packaging {
         jniLibs {
             keepDebugSymbols.add("*/arm64-v8a/libandroid-spawn.so")
+            keepDebugSymbols.add("*/arm64-v8a/libdispatch.so")
             keepDebugSymbols.add("*/armeabi-v7a/libandroid-spawn.so")
+            keepDebugSymbols.add("*/armeabi-v7a/libdispatch.so")
             keepDebugSymbols.add("*/x86_64/libandroid-spawn.so")
+            keepDebugSymbols.add("*/x86_64/libdispatch.so")
         }
     }
 
