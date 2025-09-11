@@ -73,23 +73,24 @@ chmod +x ./copy-so-files.sh
 
 ```bash
 # Download and extract from URL, then copy .so files
-./copy-so-files.sh https://github.com/finagolfin/swift-android-sdk/releases/download/6.1.2/swift-6.1.2-RELEASE-android-24-0.1.artifactbundle.tar.gz
+./copy-so-files.sh https://github.com/finagolfin/swift-android-sdk/releases/download/6.1.3/swift-6.1.3-RELEASE-android-24-0.1.artifactbundle.tar.gz
 
 # Same as above, but keep the archive and extracted files
 ./copy-so-files.sh --keep https://github.com/...
 
 # Dry run (shows what would be copied without copying)
-./copy-so-files.sh --dry swift-6.1.2-RELEASE-android-24-0.1.artifactbundle.tar.gz
+./copy-so-files.sh --dry swift-6.1.3-RELEASE-android-24-0.1.artifactbundle.tar.gz
 
 # Use an already-extracted artifact bundle directory
-./copy-so-files.sh ./swift-6.1.2-RELEASE-android-24-0.1.artifactbundle
-
+./copy-so-files.sh ./swift-6.1.3-RELEASE-android-24-0.1.artifactbundle
+```
 
 ## Versioning
 
 Each Git tag represents the corresponding Swift version the .so libraries were built for.
 
 For example:
-- 6.1.0 → Swift 6.1.0
-- 6.1.2 → Swift 6.1.2
 - 6.2.0 → Swift 6.2.0 (future)
+- 6.1.3 → Swift 6.1.3
+- 6.1.2 → Swift 6.1.2
+- 6.1.0 → Swift 6.1.0
