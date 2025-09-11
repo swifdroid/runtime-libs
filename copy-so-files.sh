@@ -36,8 +36,8 @@ get_arch_path() {
 get_so_files_for_submodule() {
     case "$1" in
         compression) echo "liblzma.so libz.so" ;;
-        core) echo "libandroid-execinfo.so libandroid-spawn.so libc++_shared.so libcharset.so libswift_Builtin_float.so libswift_Concurrency.so libswift_Differentiation.so libswift_math.so libswift_RegexParser.so libswift_StringProcessing.so libswift_Volatile.so libswiftAndroid.so libswiftCore.so libswiftDistributed.so libswiftObservation.so libswiftRegexBuilder.so libswiftSwiftOnoneSupport.so libswiftSynchronization.so" ;;
-        foundation) echo "lib_FoundationICU.so libBlocksRuntime.so libdispatch.so libFoundation.so libiconv.so libswiftDispatch.so" ;;
+        core) echo "libBlocksRuntime.so libandroid-execinfo.so libandroid-spawn.so libc++_shared.so libcharset.so libdispatch.so libswift_Builtin_float.so libswift_Concurrency.so libswift_Differentiation.so libswift_math.so libswift_RegexParser.so libswift_StringProcessing.so libswift_Volatile.so libswiftAndroid.so libswiftCore.so libswiftDispatch.so libswiftDistributed.so libswiftObservation.so libswiftRegexBuilder.so libswiftSwiftOnoneSupport.so libswiftSynchronization.so" ;;
+        foundation) echo "lib_FoundationICU.so libFoundation.so libiconv.so" ;;
         foundationessentials) echo "libFoundationEssentials.so" ;;
         i18n) echo "libFoundationInternationalization.so" ;;
         networking) echo "libcrypto.so libcurl.so libFoundationNetworking.so libnghttp2.so libnghttp3.so libssh2.so libssl.so" ;;
