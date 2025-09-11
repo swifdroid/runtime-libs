@@ -2,14 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.1.3] - 2025-09-11
+### Changed
+- Updated all `.so` files to Swift 6.1.3
+- Fixed `copy-so-files.sh` helper script
+
 ## [6.1.2] - 2025-06-04
 ### Added
-- Updated all `.so` files to Swift 6.1.2
 - Added `copy-so-files.sh` helper script:
   - Supports extracting `.so` files from local archives, URLs, or extracted `.artifactbundle` folders
   - Automatically detects sysroot and organizes outputs into submodule `jniLibs`
   - Includes `--keep` flag to retain downloaded/extracted files
   - Includes `--dry` flag for dry-run mode (shows actions without copying)
+### Changed
+- Updated all `.so` files to Swift 6.1.2
 
 ## [6.1.0] - 2025-05-26
 ### Added
