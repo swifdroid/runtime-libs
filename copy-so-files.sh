@@ -41,7 +41,7 @@ get_so_files_for_submodule() {
         foundationessentials) echo "libFoundationEssentials.so" ;;
         i18n) echo "libFoundationInternationalization.so" ;;
         networking) echo "libcrypto.so libcurl.so libFoundationNetworking.so libnghttp2.so libnghttp3.so libssh2.so libssl.so" ;;
-        testing) echo "libTesting.so libXCTest.so" ;;
+        testing) echo "lib_Testing_Foundation.so libTesting.so libXCTest.so" ;;
         xml) echo "libFoundationXML.so libxml2.so" ;;
         *) return 1 ;;
     esac
