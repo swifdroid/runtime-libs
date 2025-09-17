@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.0] - 2025-09-18
+### Added
+- Added `lib_Testing_Foundation.so` into `testing` module
+### Changed
+- Updated all `.so` files to Swift 6.2.0
+- Updated `copy-so-files.sh` helper script
+
 ## [6.1.3] - 2025-09-11
 ### Changed
 - Updated all `.so` files to Swift 6.1.3
