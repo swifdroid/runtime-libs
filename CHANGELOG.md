@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.2.0-16kb] - 2025-09-28
+### Changed
+- Updated all `.so` files to Swift 6.2.0 from the official SDK with 16KB page size support
+- Updated `copy-so-files.sh` helper script to align with the official SDK structure
+### Removed
+- Removed `compression` module with `libz.so` and `liblzma.so`
+- Removed `libandroid-execinfo.so`, `libandroid-spawn.so`, and `libcharset.so` from `core` module
+- Removed `libiconv.so` from `foundation` module
+- Removed `libcrypto.so`, `libcurl.so`, `libnghttp2.so`, `libnghttp3.so`, `libssh2.so`, `libssl.so` from `networking` module
+- Removed `libxml2.so` from `xml` module
+_These libraries are not part of the official Swift Android SDK distribution and can be added separately if needed._
+
 ## [6.2.0] - 2025-09-18
 ### Added
 - Added `lib_Testing_Foundation.so` into `testing` module
