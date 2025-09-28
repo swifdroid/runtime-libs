@@ -14,7 +14,6 @@ ARCHS=(
 )
 
 SUBMODULES=(
-    "compression"
     "core"
     "foundation"
     "foundationessentials"
@@ -26,23 +25,22 @@ SUBMODULES=(
 
 get_arch_path() {
     case "$1" in
-        arm64-v8a) echo "aarch64-linux-android" ;;
-        armeabi-v7a) echo "arm-linux-androideabi" ;;
-        x86_64) echo "x86_64-linux-android" ;;
+        arm64-v8a) echo "swift-aarch64" ;;
+        armeabi-v7a) echo "swift-armv7" ;;
+        x86_64) echo "swift-x86_64" ;;
         *) return 1 ;;
     esac
 }
 
 get_so_files_for_submodule() {
     case "$1" in
-        compression) echo "liblzma.so libz.so" ;;
-        core) echo "libBlocksRuntime.so libandroid-execinfo.so libandroid-spawn.so libc++_shared.so libcharset.so libdispatch.so libswift_Builtin_float.so libswift_Concurrency.so libswift_Differentiation.so libswift_math.so libswift_RegexParser.so libswift_StringProcessing.so libswift_Volatile.so libswiftAndroid.so libswiftCore.so libswiftDispatch.so libswiftDistributed.so libswiftObservation.so libswiftRegexBuilder.so libswiftSwiftOnoneSupport.so libswiftSynchronization.so" ;;
-        foundation) echo "lib_FoundationICU.so libFoundation.so libiconv.so" ;;
+        core) echo "libBlocksRuntime.so libdispatch.so libswift_Builtin_float.so libswift_Concurrency.so libswift_Differentiation.so libswift_math.so libswift_RegexParser.so libswift_StringProcessing.so libswift_Volatile.so libswiftAndroid.so libswiftCore.so libswiftDispatch.so libswiftDistributed.so libswiftObservation.so libswiftRegexBuilder.so libswiftSwiftOnoneSupport.so libswiftSynchronization.so" ;;
+        foundation) echo "lib_FoundationICU.so libFoundation.so" ;;
         foundationessentials) echo "libFoundationEssentials.so" ;;
         i18n) echo "libFoundationInternationalization.so" ;;
-        networking) echo "libcrypto.so libcurl.so libFoundationNetworking.so libnghttp2.so libnghttp3.so libssh2.so libssl.so" ;;
+        networking) echo "libFoundationNetworking.so" ;;
         testing) echo "lib_Testing_Foundation.so libTesting.so libXCTest.so" ;;
-        xml) echo "libFoundationXML.so libxml2.so" ;;
+        xml) echo "libFoundationXML.so" ;;
         *) return 1 ;;
     esac
 }
@@ -128,7 +126,7 @@ fi
 # ────────────────────────────────────────────────────────────────────────────────
 # EXTRACT IF ARCHIVE
 # ────────────────────────────────────────────────────────────────────────────────
-if [[ "$INPUT" == *.tar.gz ]]; then
+if [[ "$INPUT" == *.tar.gz ]] || [[ "$INPUT" == *.tar.xz ]]; then
     if [ ! -f "$INPUT" ]; then
         echo -e "${RED}❌ Error: Archive not found:${NC} $INPUT"
         exit 1
@@ -138,15 +136,18 @@ if [[ "$INPUT" == *.tar.gz ]]; then
     rm -rf ./artifactbundle 2>/dev/null || true
     mkdir -p ./artifactbundle
 
-    tar -xzf "$INPUT" -C ./artifactbundle --strip-components=0
+    if [[ "$INPUT" == *.tar.xz ]]; then
+        tar -xf "$INPUT" -C ./artifactbundle --strip-components=0
+    else
+        tar -xzf "$INPUT" -C ./artifactbundle --strip-components=0
+    fi
     NEEDS_CLEANUP=true
 
     ARTIFACT_BUNDLE_PATH=$(find ./artifactbundle -maxdepth 1 -type d -name "*.artifactbundle" | head -n 1)
     if [ -z "$ARTIFACT_BUNDLE_PATH" ]; then
-        echo -e "${RED}❌ Error: No .artifactbundle directory found after extraction.${NC}"
-        rm -rf ./artifactbundle
-        [ -n "$DOWNLOADED_ARCHIVE" ] && rm -f "$DOWNLOADED_ARCHIVE"
-        exit 1
+        # If no .artifactbundle directory found, use the artifactbundle directory itself
+        ARTIFACT_BUNDLE_PATH="./artifactbundle"
+        echo -e "${YELLOW}⚠️  No .artifactbundle directory found, using extracted directory:${NC} $ARTIFACT_BUNDLE_PATH"
     fi
 else
     ARTIFACT_BUNDLE_PATH="$INPUT"
@@ -157,34 +158,37 @@ else
 fi
 
 # ────────────────────────────────────────────────────────────────────────────────
-# AUTODETECT SDK/SYSROOT
+# AUTODETECT SWIFT-ANDROID RESOURCES PATH
 # ────────────────────────────────────────────────────────────────────────────────
 
-SDK_FOLDER=$(find "$ARTIFACT_BUNDLE_PATH" -maxdepth 1 -type d -name "swift-*-sdk" | head -n 1)
-if [ -z "$SDK_FOLDER" ]; then
-    echo -e "${RED}❌ Error: SDK folder not found inside:${NC} $ARTIFACT_BUNDLE_PATH"
+# Look for swift-android directory first
+SWIFT_ANDROID_PATH=$(find "$ARTIFACT_BUNDLE_PATH" -type d -name "swift-android" | head -n 1)
+if [ -z "$SWIFT_ANDROID_PATH" ]; then
+    echo -e "${RED}❌ Error: swift-android directory not found inside:${NC} $ARTIFACT_BUNDLE_PATH"
     $NEEDS_CLEANUP && rm -rf ./artifactbundle
     exit 1
 fi
 
-SYSROOT_FOLDER=$(find "$SDK_FOLDER" -maxdepth 1 -type d -name "android-*-sysroot" | head -n 1)
-if [ -z "$SYSROOT_FOLDER" ]; then
-    echo -e "${RED}❌ Error: sysroot folder not found inside SDK.${NC}"
+# Set the base source path to swift-resources
+ACTUAL_SOURCE="$SWIFT_ANDROID_PATH/swift-resources/usr/lib"
+
+if [ ! -d "$ACTUAL_SOURCE" ]; then
+    echo -e "${RED}❌ Error: swift-resources directory not found at:${NC} $ACTUAL_SOURCE"
+    echo -e "${YELLOW}Available directories in $SWIFT_ANDROID_PATH:${NC}"
+    find "$SWIFT_ANDROID_PATH" -maxdepth 2 -type d | sed 's/^/  /'
     $NEEDS_CLEANUP && rm -rf ./artifactbundle
     exit 1
 fi
-
-ACTUAL_SOURCE="$SYSROOT_FOLDER/usr/lib"
 
 # ────────────────────────────────────────────────────────────────────────────────
 # COPY LOGIC
 # ────────────────────────────────────────────────────────────────────────────────
 
 echo
-echo -e "${BLUE}📁 Artifact bundle path:        ${NC}$ARTIFACT_BUNDLE_PATH"
-echo -e "${BLUE}📂 Auto-detected SDK folder:    ${NC}$SDK_FOLDER"
-echo -e "${BLUE}📂 Auto-detected sysroot folder:${NC}$SYSROOT_FOLDER"
-echo -e "${BLUE}📦 Destination project root:    ${NC}$CWD"
+echo -e "${BLUE}📁 Artifact bundle path:     ${NC}$ARTIFACT_BUNDLE_PATH"
+echo -e "${BLUE}📂 Swift Android path:       ${NC}$SWIFT_ANDROID_PATH"
+echo -e "${BLUE}📂 Source library directory: ${NC}$ACTUAL_SOURCE"
+echo -e "${BLUE}📦 Destination project root: ${NC}$CWD"
 echo
 
 for submodule in "${SUBMODULES[@]}"; do
@@ -201,7 +205,8 @@ for submodule in "${SUBMODULES[@]}"; do
         for so in $so_files; do
             [ "$DRY" = true ] && echo -e "        🔖 ${BLUE}SO: ${so}"
 
-            src_file="$ACTUAL_SOURCE/$arch_path/$so"
+            # New path structure: swift-resources/usr/lib/swift-aarch64/android/libswiftCore.so
+            src_file="$ACTUAL_SOURCE/$arch_path/android/$so"
             dest_file="$jni_dir/$so"
 
             if [ ! -f "$src_file" ]; then
