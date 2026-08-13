@@ -13,7 +13,7 @@ This repository must be safe to open and work with directly. Parent `../SwifDroi
 When local documents conflict, higher authority wins:
 
 1. `.agent/SYSTEM_RULES.md` - repository invariants
-2. `.agent/WORKFLOW.md` and `.agent/COMMIT_RULES.md` - development/Git workflow
+2. `.agent/WORKFLOW.md`, `.agent/DEVELOPMENT_ORCHESTRATION.md`, `.agent/ARTIFACTS_WORKFLOW.md`, and `.agent/COMMIT_RULES.md` - development/orchestration/artifact/Git workflow
 3. `.agent/ARCH_INDEX.md` and the owning `.agent/architecture/*.md` file - technical architecture authority
 4. repository source/build configuration and task-specific evidence
 5. `.agent/MASTER_PLAN.md` - repository roadmap
@@ -21,7 +21,6 @@ When local documents conflict, higher authority wins:
 7. `.agent/PROJECT_MEMORY.md` and `.agent/SOURCE_MAP.md` - durable facts/navigation
 8. `.agent/TASKS.md`, `.agent/TODO.md`, `.agent/TECH_DEBT.md`, `.agent/TASKS_ARCHIVE.md` - work state
 9. `.agent/CONTEXT_LOADING_RULES.md` and `.agent/SKILL_INDEX.md` - routing/procedures
-10. `.agent/CHATGPT.md` - ChatGPT orchestration workflow only
 
 `.artifacts/**` is transient plans/evidence/working memory, never stable product authority.
 
@@ -33,6 +32,15 @@ Use **PLAN -> IMPLEMENT -> AUDIT** for non-trivial work.
 - Make the smallest coherent packaging/build change.
 - Audit AAR/module configuration, binary layout/provenance, consumer impact, changelog/docs impact, and Git state.
 - If the configured Swift Android toolchain or expected binary set contradicts the plan, stop that implementation path and re-plan instead of normalizing the discrepancy.
+
+### Mandatory Iterative-Development Routing
+
+For non-trivial iterative LLM-assisted work, load `.agent/DEVELOPMENT_ORCHESTRATION.md` and `.agent/ARTIFACTS_WORKFLOW.md`.
+
+- Use `.artifacts/**` as disposable Git-ignored external working memory for research, plans, numbered surgical tasks, execution evidence, verification, reviews, corrections, and chat handoff.
+- Large implementation/correction work is decomposed into numbered task files; the executor receives one short generic coordinator prompt and runs approved tasks autonomously in order.
+- If `.artifacts/**` is missing, reconstruct current context from stable docs + Git + actual source/build configuration instead of guessing lost transient state.
+- Executor reports are evidence, never proof; independently audit actual repository state afterward.
 
 ## Mandatory Context Routing
 

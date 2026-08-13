@@ -6,11 +6,13 @@ Mandatory development workflow for `core-libs`.
 
 Every non-trivial task follows:
 
-1. **PLAN** - define exact module/path scope, runtime/toolchain inputs, expected mutations, downstream risk, and completion evidence.
-2. **IMPLEMENT** - execute the reviewed plan without unrelated module, binary, build, or release expansion.
-3. **AUDIT** - verify configuration, binary layout/provenance, build output, downstream compatibility when required, docs/changelog impact, and Git state.
+1. **PLAN** - research current facts, define exact module/path scope, runtime/toolchain inputs, expected mutations, downstream risk, and completion evidence. Externalize substantial research/plan state under `.artifacts/planning/<slug>/` according to `ARTIFACTS_WORKFLOW.md`.
+2. **IMPLEMENT** - execute the reviewed plan without unrelated module, binary, build, or release expansion. Large/multi-behavior work is decomposed into numbered surgical task files before an implementation executor receives it.
+3. **AUDIT** - verify configuration, binary layout/provenance, build output, downstream compatibility when required, docs/changelog impact, and Git state with concrete evidence; use focused correction task files when needed and synchronize durable knowledge that actually changed.
 
 Small typo/prose-only work may skip a formal plan but still requires scope/result verification.
+
+For substantial iterative work, `ARTIFACTS_WORKFLOW.md` is mandatory operational guidance. Detailed mechanics live in task files; `COORDINATOR_PROMPT.md` stays short and drives autonomous task-by-task execution with append-only reporting.
 
 ## Binary and Toolchain Changes
 
