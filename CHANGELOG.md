@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.3.0] - 2026-09-16
+### Changed
+- Updated all `.so` files to Swift 6.3.0 from the official SDK
+
 ## [6.2.0-16kb] - 2025-09-28
 ### Changed
 - Updated all `.so` files to Swift 6.2.0 from the official SDK with 16KB page size support
