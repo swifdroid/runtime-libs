@@ -34,13 +34,13 @@ Then add dependencies to the modules you need:
 
 ```kotlin
 dependencies {
-    implementation("com.github.SwifDroid.runtime-libs:core:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:foundation:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:foundationessentials:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:i18n:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:networking:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:testing:6.3.2")
-    implementation("com.github.SwifDroid.runtime-libs:xml:6.3.2")
+    implementation("com.github.SwifDroid.runtime-libs:core:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:foundation:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:foundationessentials:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:i18n:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:networking:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:testing:6.3.3")
+    implementation("com.github.SwifDroid.runtime-libs:xml:6.3.3")
 }
 ```
 
@@ -71,16 +71,16 @@ chmod +x ./copy-so-files.sh
 
 ```bash
 # Download and extract from URL, then copy .so files
-./copy-so-files.sh https://download.swift.org/swift-6.3.2-release/android-sdk/swift-6.3.2-RELEASE/swift-6.3.2-RELEASE_android.artifactbundle.tar.gz
+./copy-so-files.sh https://download.swift.org/swift-6.3.3-release/android-sdk/swift-6.3.3-RELEASE/swift-6.3.3-RELEASE_android.artifactbundle.tar.gz
 
 # Same as above, but keep the archive and extracted files
 ./copy-so-files.sh --keep https://github.com/...
 
 # Dry run (shows what would be copied without copying)
-./copy-so-files.sh --dry swift-6.3.2-RELEASE_android.artifactbundle.tar.gz
+./copy-so-files.sh --dry swift-6.3.3-RELEASE_android.artifactbundle.tar.gz
 
 # Use an already-extracted artifact bundle directory
-./copy-so-files.sh ./swift-6.3.2-RELEASE_android.artifactbundle
+./copy-so-files.sh ./swift-6.3.3-RELEASE_android.artifactbundle
 ```
 
 ## Versioning
