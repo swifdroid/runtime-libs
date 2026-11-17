@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [6.4.1] - 2026-11-18
+### Changed
+- Updated all `.so` files to Swift 6.4.1 from the official SDK
+
 ## [6.4.0] - 2026-09-16
 ### Changed
 - Updated all `.so` files to Swift 6.4.0 from the official SDK
